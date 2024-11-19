@@ -74,7 +74,7 @@ app.post("/login", async (req, res) => {
         .cookie("token", token, {
           httpOnly: true,
           secure: false, // Use true in production (requires HTTPS)
-          sameSite: "lax", // Adjust this based on your deployment setup
+          sameSite: "none", // Adjust this based on your deployment setup
         })
         .json({ message: "Login successful", token });
     }
