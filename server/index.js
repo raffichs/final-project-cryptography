@@ -33,18 +33,14 @@ app.use((req, res, next) => {
   next();
 });
 
-
 app.use(cors({
   origin: 'https://final-project-cryptography.vercel.app', // Allow this origin
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed methods
   credentials: true // Include cookies in cross-origin requests if needed
 }));
 
-
 // Handle preflight requests
-app.options('*', (req, res) => {
-  res.sendStatus(200);
-});
+app.options('*', cors());
 
 // Route: Register User
 app.post("/register", async (req, res) => {
@@ -94,8 +90,8 @@ app.post("/login", async (req, res) => {
       res
         .cookie("token", token, {
           httpOnly: true,
-          secure: false, // Use true in production (requires HTTPS)
-          sameSite: None, // Adjust this based on your deployment setup
+          secure: true, // Use true in production (requires HTTPS)
+          sameSite: 'None', // Adjust this based on your deployment setup
         })
         .json({ message: "Login successful", token });
     }
