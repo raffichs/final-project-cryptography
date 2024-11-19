@@ -25,6 +25,19 @@ app.use(
 );
 app.use(cookieParser());
 
+// Enable CORS for all routes
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  next();
+});
+
+// Handle preflight requests
+app.options('*', (req, res) => {
+  res.sendStatus(200);
+});
+
 // Route: Register User
 app.post("/register", async (req, res) => {
   const { username, password } = req.body;
@@ -74,7 +87,7 @@ app.post("/login", async (req, res) => {
         .cookie("token", token, {
           httpOnly: true,
           secure: false, // Use true in production (requires HTTPS)
-          sameSite: "none", // Adjust this based on your deployment setup
+          sameSite: None, // Adjust this based on your deployment setup
         })
         .json({ message: "Login successful", token });
     }
