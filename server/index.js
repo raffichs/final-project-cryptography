@@ -134,56 +134,56 @@ app.listen(PORT, () =>
   console.log(`Server running on http://localhost:${PORT}`)
 );
 
-const multer = require("multer");
+// const multer = require("multer");
 const { encode, decode } = require("./steganographyUtils");
 const fs = require("fs");
 const path = require("path");
 
-const upload = multer({ dest: "uploads/" });
+// const upload = multer({ dest: "uploads/" });
 
-app.post("/encode", upload.single("imageToHide"), async (req, res) => {
-  try {
-    if (!req.file) {
-      return res.status(400).json({ error: "No image uploaded" });
-    }
+// app.post("/encode", upload.single("imageToHide"), async (req, res) => {
+//   try {
+//     if (!req.file) {
+//       return res.status(400).json({ error: "No image uploaded" });
+//     }
 
-    // Path to your default cover image
-    const coverImagePath = path.join(__dirname, "assets", "default_cover.png");
+//     // Path to your default cover image
+//     const coverImagePath = path.join(__dirname, "assets", "default_cover.png");
 
-    const result = await encode(req.file.path, coverImagePath);
+//     const result = await encode(req.file.path, coverImagePath);
 
-    // Convert result to base64
-    const encodedImageBase64 = result.toString("base64");
+//     // Convert result to base64
+//     const encodedImageBase64 = result.toString("base64");
 
-    // Clean up temporary files
-    fs.unlinkSync(req.file.path);
+//     // Clean up temporary files
+//     fs.unlinkSync(req.file.path);
 
-    res.json({ encodedImage: encodedImageBase64 });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Encoding failed" });
-  }
-});
+//     res.json({ encodedImage: encodedImageBase64 });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ error: "Encoding failed" });
+//   }
+// });
 
-app.post("/decode", upload.single("encodedImage"), async (req, res) => {
-  try {
-    if (!req.file) {
-      return res.status(400).json({ error: "No image uploaded" });
-    }
+// app.post("/decode", upload.single("encodedImage"), async (req, res) => {
+//   try {
+//     if (!req.file) {
+//       return res.status(400).json({ error: "No image uploaded" });
+//     }
 
-    const decodedBuffer = await decode(req.file.path);
+//     const decodedBuffer = await decode(req.file.path);
 
-    // Convert to Base64
-    const decodedImageBase64 = decodedBuffer.toString("base64");
+//     // Convert to Base64
+//     const decodedImageBase64 = decodedBuffer.toString("base64");
 
-    // Clean up the uploaded file
-    fs.unlinkSync(req.file.path);
+//     // Clean up the uploaded file
+//     fs.unlinkSync(req.file.path);
 
-    res.json({ decodedImage: decodedImageBase64 });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Decoding failed" });
-  }
-});
+//     res.json({ decodedImage: decodedImageBase64 });
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).json({ error: "Decoding failed" });
+//   }
+// });
 
 module.exports = app;
