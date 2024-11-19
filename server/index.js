@@ -19,7 +19,7 @@ connectDB();
 app.use(bodyParser.json());
 app.use(
   cors({
-    origin: "http://localhost:5173", // Replace with your frontend's origin
+    origin: "https://final-project-cryptography.vercel.app", // Replace with your frontend's origin
     credentials: true, // Allow credentials (cookies)
   })
 );

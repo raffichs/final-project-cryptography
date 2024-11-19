@@ -13,9 +13,12 @@ export default function MainPage() {
       try {
         axios.defaults.withCredentials = true;
 
-        const response = await axios.get("http://localhost:5000/protected", {
-          withCredentials: true, // Include cookies in the request
-        });
+        const response = await axios.get(
+          "https://final-project-cryptography-server.vercel.app/protected",
+          {
+            withCredentials: true, // Include cookies in the request
+          }
+        );
         console.log(response.data); // Log authenticated user data
       } catch (err) {
         console.error(err.response?.data?.message || "Unauthorized");
@@ -29,7 +32,9 @@ export default function MainPage() {
   useEffect(() => {
     const fetchConfessions = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/confessions");
+        const response = await axios.get(
+          "https://final-project-cryptography-server.vercel.app/confessions"
+        );
         setConfessions(response.data); // Store the confessions data in state
         setFilteredConfessions(response.data); // Initialize filtered results
       } catch (err) {

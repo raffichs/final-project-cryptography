@@ -15,7 +15,7 @@ export default function DecryptionPage() {
     const fetchConfession = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/confessions/${id}`
+          `https://final-project-cryptography-server.vercel.app/confessions/${id}`
         );
         setConfession(response.data);
       } catch (err) {

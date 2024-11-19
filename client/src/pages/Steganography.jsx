@@ -23,9 +23,13 @@ function SteganographyUploader() {
     formData.append("imageToHide", imageToHide);
 
     try {
-      const response = await axios.post("http://localhost:5000/encode", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      const response = await axios.post(
+        "https://final-project-cryptography-server.vercel.app/encode",
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
       setEncodedImage(`data:image/png;base64,${response.data.encodedImage}`);
       setError("");
     } catch (err) {
@@ -45,9 +49,13 @@ function SteganographyUploader() {
     formData.append("encodedImage", encodedFile);
 
     try {
-      const response = await axios.post("http://localhost:5000/decode", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      const response = await axios.post(
+        "https://final-project-cryptography-server.vercel.app/decode",
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
       setDecodedImage(`data:image/png;base64,${response.data.decodedImage}`);
       setError("");
     } catch (err) {
@@ -61,7 +69,12 @@ function SteganographyUploader() {
       <h2 className="text-2xl mb-4">Steganography Tool</h2>
       <div>
         <h3 className="text-lg mb-2">1. Encode an Image</h3>
-        <input type="file" accept="image/*" onChange={handleFileChange} className="mb-4" />
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleFileChange}
+          className="mb-4"
+        />
         {error && <p className="text-red-500 mb-4">{error}</p>}
         <button
           onClick={handleUpload}
@@ -74,17 +87,30 @@ function SteganographyUploader() {
       {encodedImage && (
         <div className="mt-4">
           <h3 className="text-lg mb-2">Encoded Image:</h3>
-          <img src={encodedImage} alt="Encoded" className="max-w-full h-auto border rounded" />
+          <img
+            src={encodedImage}
+            alt="Encoded"
+            className="max-w-full h-auto border rounded"
+          />
         </div>
       )}
 
       <div className="mt-8">
         <h3 className="text-lg mb-2">2. Decode an Image</h3>
-        <input type="file" accept="image/*" onChange={handleDecode} className="mb-4" />
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleDecode}
+          className="mb-4"
+        />
         {decodedImage && (
           <div className="mt-4">
             <h3 className="text-lg mb-2">Decoded Image:</h3>
-            <img src={decodedImage} alt="Decoded" className="max-w-full h-auto border rounded" />
+            <img
+              src={decodedImage}
+              alt="Decoded"
+              className="max-w-full h-auto border rounded"
+            />
           </div>
         )}
       </div>

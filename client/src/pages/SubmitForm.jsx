@@ -18,9 +18,12 @@ export default function SubmitForm() {
       try {
         axios.defaults.withCredentials = true;
 
-        const response = await axios.get("http://localhost:5000/protected", {
-          withCredentials: true, // Include cookies in the request
-        });
+        const response = await axios.get(
+          "https://final-project-cryptography-server.vercel.app/protected",
+          {
+            withCredentials: true, // Include cookies in the request
+          }
+        );
         console.log(response.data); // Log authenticated user data
       } catch (err) {
         console.error(err.response?.data?.message || "Unauthorized");
@@ -76,13 +79,16 @@ export default function SubmitForm() {
     };
 
     try {
-      const response = await fetch("http://localhost:5000/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(dataToSubmit),
-      });
+      const response = await fetch(
+        "https://final-project-cryptography-server.vercel.app/submit",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(dataToSubmit),
+        }
+      );
 
       const result = await response.json();
       if (response.ok) {

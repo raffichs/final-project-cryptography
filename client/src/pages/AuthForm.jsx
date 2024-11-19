@@ -22,8 +22,8 @@ export default function AuthForm() {
 
     try {
       const url = isLogin
-        ? "http://localhost:5000/login"
-        : "http://localhost:5000/register";
+        ? "https://final-project-cryptography-server.vercel.app/login"
+        : "https://final-project-cryptography-server.vercel.app/register";
       await axios.post(
         url,
         formData,
